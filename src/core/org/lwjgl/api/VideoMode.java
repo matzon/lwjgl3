@@ -5,36 +5,36 @@
 package org.lwjgl.api;
 
 /**
- * This Interface encapsulates the properties for a given display mode.
+ * This Interface encapsulates the properties for a given video mode.
  *
- * @see org.lwjgl.api.Monitor#getAvailableDisplayModes()
+ * @see org.lwjgl.api.Monitor#getAvailableVideoModes()
  *
  * @author cix_foo <cix_foo@users.sourceforge.net>
  * @author Brian Matzon <brian@matzon.dk>
  */
-public interface DisplayMode {
+public interface VideoMode {
     /**
      * True if this instance can be used for fullscreen modes
      */
     public boolean isFullscreenCapable();
 
     /**
-     * @return width of this DisplayMode
+     * @return width of this VideoMode
      */
     public int getWidth();
 
     /**
-     * @return height of this DisplayMode
+     * @return height of this VideoMode
      */
     public int getHeight();
 
     /**
-     * @return bits per pixel of this DisplayMode
+     * @return bits per pixel of this VideoMode
      */
     public int getBitsPerPixel();
 
     /**
-     * @return frequency of this DisplayMode
+     * @return frequency of this VideoMode
      */
     public int getFrequency();
 }

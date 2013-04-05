@@ -4,7 +4,9 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.Backend;
 import org.lwjgl.system.Platform;
+import org.lwjgl.system.glfw.GLFWBackend;
 import org.lwjgl.system.windows.WindowsPlatform;
 
 import java.io.File;
@@ -12,7 +14,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 /**
- * System class. The static initializers in this class must run before
+ * Sys class. The static initializers in this class must run before
  * anything else executes in LWJGL.
  */
 public final class Sys {
@@ -21,6 +23,7 @@ public final class Sys {
 	private static final String JNI_LIBRARY_NAME = "lwjgl";
 	private static final String POSTFIX64BIT     = "64";
 
+    private static final Backend backend;
 	private static final Platform platform;
 	private static final String   nativeLibrary;
 
@@ -28,8 +31,21 @@ public final class Sys {
 	private static final String VERSION = "3.0.0";
 
 	static {
-		platform = new WindowsPlatform();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                if(backend != null) {
+                    backend.destroy();
+                }
+            }
+        });
+
 		nativeLibrary = loadLibrary(JNI_LIBRARY_NAME);
+
+        backend = new GLFWBackend();
+        backend.initialize();
+
+        platform = new WindowsPlatform();
 	}
 
 	private Sys() {
@@ -93,5 +109,9 @@ public final class Sys {
 			}
 		});
 	}
+
+    public static Backend getBackend() {
+        return backend;
+    }
 
 }

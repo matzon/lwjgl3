@@ -29,14 +29,14 @@ public interface Window {
     /**
      * @return this method will return the width of the window.
      *         <p/>
-     *         If running in fullscreen mode it will return the width of the current set DisplayMode.
+     *         If running in fullscreen mode it will return the width of the current set VideoMode.
      */
     public int getWidth();
 
     /**
      * @return this method will return the height of the window.
      *         <p/>
-     *         If running in fullscreen mode it will return the height of the current set DisplayMode.
+     *         If running in fullscreen mode it will return the height of the current set VideoMode.
      */
     public int getHeight();
 
@@ -60,7 +60,7 @@ public interface Window {
     public void setFullscreen(boolean fullscreen);
 
     /**
-     * @return whether the Display is in fullscreen mode
+     * @return whether the Window is in fullscreen mode
      */
     public boolean isFullscreen();
 
@@ -75,7 +75,7 @@ public interface Window {
     public boolean isVisible();
 
     /**
-     * @return true if window is active, that is, the foreground display of the operating system.
+     * @return true if window is active, that is, the foreground of the operating system.
      */
     public boolean isActive();
 
