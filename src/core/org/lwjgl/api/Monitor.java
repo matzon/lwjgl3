@@ -4,6 +4,7 @@
  */
 package org.lwjgl.api;
 
+import org.lwjgl.Sync;
 import org.lwjgl.Sys;
 
 import java.util.List;
@@ -98,7 +99,9 @@ public abstract class Monitor {
      *
      * @param fps - the desired frame rate, in frames per second
      */
-    public abstract void sync(int fps);
+    public void sync(int fps) {
+        Sync.sync(fps);
+    }
 
     /**
      * Get the driver adapter string. This is a unique string describing the actual card's hardware, eg. "Geforce2", "PS2",

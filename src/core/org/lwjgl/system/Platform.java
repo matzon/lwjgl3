@@ -8,4 +8,8 @@ public interface Platform {
 
 	boolean has64Bit();
 
+    long getTime();
+
+    long getTimerResolution();
+
 }

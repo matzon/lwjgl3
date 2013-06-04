@@ -7,6 +7,8 @@ package org.lwjgl;
 import org.lwjgl.system.Backend;
 import org.lwjgl.system.Platform;
 import org.lwjgl.system.glfw.GLFWBackend;
+import org.lwjgl.system.linux.LinuxPlatform;
+import org.lwjgl.system.macosx.MacOSXPlatform;
 import org.lwjgl.system.windows.WindowsPlatform;
 
 import java.io.File;
@@ -42,13 +44,19 @@ public final class Sys {
 
 		nativeLibrary = loadLibrary(JNI_LIBRARY_NAME);
 
+        switch(LWJGLUtil.getPlatform()) {
+            case WINDOWS: platform = new WindowsPlatform(); break;
+            case LINUX: platform = new LinuxPlatform(); break;
+            case MACOSX: platform = new MacOSXPlatform(); break;
+            default:
+                throw new IllegalArgumentException("Unsupported platform: " + LWJGLUtil.getPlatform());
+        }
+
         backend = new GLFWBackend();
         backend.initialize();
-
-        platform = new WindowsPlatform();
 	}
 
-	private Sys() {
+    private Sys() {
 	}
 
 	/** Dummy method to trigger the static initializers. */
@@ -115,4 +123,11 @@ public final class Sys {
         return backend;
     }
 
+    public static long getTime() {
+        return platform.getTime();
+    }
+
+    public static long getTimerResolution() {
+        return platform.getTimerResolution();
+    }
 }

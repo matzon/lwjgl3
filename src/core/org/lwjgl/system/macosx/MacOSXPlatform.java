@@ -2,17 +2,17 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.windows;
+package org.lwjgl.system.macosx;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.Platform;
 
-import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.WinBase.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.system.windows.WinBase.GetLastError;
 
-public class WindowsPlatform implements Platform {
+public class MacOSXPlatform implements Platform {
 
-	public WindowsPlatform() {
+	public MacOSXPlatform() {
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class WindowsPlatform implements Platform {
 
     @Override
     public long getTime() {
-        return Mmsystem.timeGetTime();
+        return System.currentTimeMillis();
     }
 
     @Override
@@ -30,17 +30,17 @@ public class WindowsPlatform implements Platform {
         return 1000;
     }
 
-    public static void windowsCheckHandle(long handle, String msg) {
+    public static void macOSXCheckHandle(long handle, String msg) {
 		if ( handle == NULL )
-			windowsThrowException(msg);
+            macOSXThrowException(msg);
 	}
 
-	public static void windowsCheckResult(int result, String action) {
+	public static void macOSXCheckResult(int result, String action) {
 		if ( LWJGLUtil.DEBUG && result == 0 )
 			throw new RuntimeException(action + " failed (error code = " + GetLastError() + ")");
 	}
 
-	public static void windowsThrowException(String msg) {
+	public static void macOSXThrowException(String msg) {
 		throw new RuntimeException(msg + " (error code = " + GetLastError() + ")");
 	}
 
