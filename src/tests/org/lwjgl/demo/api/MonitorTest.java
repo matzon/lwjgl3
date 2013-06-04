@@ -30,7 +30,7 @@ public class MonitorTest {
     @Test
     public void testConnectedMonitors() {
         List<Monitor> monitors = getConnectedMonitors();
-        assertNotEquals(0, monitors.size(), "Expected more than 0 connected monitors");
+        assertNotSame(0, monitors.size(), "Expected more than 0 connected monitors");
 
         for (Monitor monitor : monitors) {
             assertNotNull(monitor.getName(), "Expected monitor name");
