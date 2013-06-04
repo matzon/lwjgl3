@@ -119,6 +119,9 @@
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
 		<javac debug="yes" destdir="${lwjgl.bin}/Core" encoding="utf8" source="1.6" target="1.6" bootclasspathref="java6.boot.classpath" taskname="Core java compilation" >
+            <classpath>
+                <path location="libs\disruptor.jar"/>
+            </classpath>
 			<src path="${lwjgl.src.core}"/>
             <src path="${lwjgl.src.util}/"/>
 			<src path="${lwjgl.generated.java}"/>
@@ -168,7 +171,7 @@
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
-		<testng outputDir="${lwjgl.tests.output}">
+		<testng outputDir="${lwjgl.tests.output}" haltOnFailure="true" verbose="2">
 			<classpath>
 				<pathelement path="${lwjgl.lib}/jcommander.jar"/>
 				<pathelement path="${lwjgl.bin.core}"/>
