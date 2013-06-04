@@ -121,6 +121,7 @@ public class CLTest {
 		});
 	}
 
+    @Test(enabled = false)
 	public void testNativeKernel() {
 		contextTest(new ContextTest() {
 			@Override
